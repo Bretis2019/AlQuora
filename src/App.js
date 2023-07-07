@@ -2,33 +2,57 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Form from "./components/Form";
-import {useState} from "react";
-import {data} from "./components/Data";
+import {useEffect, useState} from "react";
 import Notifications from "./components/Notifications";
+import {addDoc, onSnapshot, setDoc, doc, getDoc} from "firebase/firestore"
+import {questionCollection, db} from "./config";
 
 export default function App() {
-    const [questions, setQuestions] = useState(data);
+    const [questions, setQuestions] = useState([]);
     const [showForm ,setShowForm] = useState(false)
     const [formState ,setFormState] = useState(false) //false => question
     const [index, setIndex] = useState(0)
     const [page, setPage] = useState("home")
     const [query, setQuery] = useState("")
 
+    useEffect(() => {
+        return onSnapshot(questionCollection, function (snapshot) {
+            // Sync up our local notes array with the snapshot data
+            const questionsArr = snapshot.docs.map(doc => ({
+                ...doc.data(),
+                id: doc.id
+            }))
+            setQuestions(questionsArr)
+        })
+    }, [])
+
     function getIndex(prop){
         setIndex(prop)
-        console.log(index)
     }
 
-    function addQuestion(header){
+    useEffect(()=>{
+        console.log(questions)
+    },[questions])
+
+    async function addQuestion(header){
         const newQuestion = { header, answers: [] };
-        setQuestions([...questions, newQuestion]);
+        await addDoc(questionCollection, newQuestion)
     }
 
-    function addAnswer(questionIndex, answerText) {
-        const updatedQuestions = [...questions];
-        const question = updatedQuestions[questionIndex];
-        question.answers.push(answerText);
-        setQuestions(updatedQuestions);
+    async function addAnswer(questionIndex, answerText) {
+        for (let i = 0; i < questions.length; i++) {
+            const item = questions[i];
+            if (item.id === questionIndex) {
+                item.answers.push(answerText);
+                const docRef = doc(db,"questions",item.id);
+                const docSnapshot = await getDoc(docRef);
+                const docData = docSnapshot.data();
+                const updatedAnswers = [...docData.answers, answerText];
+                await setDoc(docRef, { answers: updatedAnswers }, { merge: true });
+                return
+            }
+        }
+        return null
     }
 
     function DisplayFormQ(){

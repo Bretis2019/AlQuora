@@ -14,12 +14,12 @@ export default function Home(props) {
             }
             return true;
         })
-        .map((item, index) => (
+        .map(item => (
             <Card
-                key={index}
+                key={item.id}
                 question={item.header}
                 answers={item.answers}
-                handleClick={() => addAnswer(index)}
+                handleClick={() => addAnswer(item.id)}
             />
         ));
 
