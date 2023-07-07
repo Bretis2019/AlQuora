@@ -10,7 +10,7 @@ export default function Card(props) {
     }
 
     return (
-        <div className={"bg-white p-8 w-[580px] h-fit rounded-2xl shadow-standard"}>
+        <div className={"bg-white p-8 w-[100svw] md:w-[580px] h-fit rounded-2xl shadow-standard"}>
             <h1 className={"font-black text-2xl mb-4"}>{question}</h1>
             <ul className={"list-disc space-y-4"}>{answerElements}</ul>
             <button

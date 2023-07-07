@@ -25,7 +25,7 @@ export default function Form(props){
     }
     return(
         <div className={"fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-black bg-opacity-80 w-full h-full"} onClick={clickOnExit}>
-            <div className={"flex flex-col items-center justify-center p-8 w-[580px] h-fit rounded-2xl relative z-10 bg-white left-0 right-0 mx-auto top-80 space-y-4 shadow-standard"}>
+            <div className={"flex flex-col items-center justify-center p-8 w-screen md:w-[580px] h-fit rounded-2xl relative z-10 bg-white left-0 right-0 mx-auto top-10 md:top-80 space-y-4 shadow-standard"}>
                 <>
                     <label
                         htmlFor="message"

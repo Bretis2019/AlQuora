@@ -30,11 +30,11 @@ export default function Home(props) {
     }
 
     return (
-        <div className={"pt-28 bg-gray-100 w-screen h-fit min-h-screen flex pl-[15%] py-16 gap-x-16"}>
+        <div className={"pt-28 bg-gray-100 w-screen h-fit min-h-screen flex md:pl-[15%] py-16 gap-x-16"}>
             <div className={"flex flex-col gap-y-14"}>
                 {cardElements}
             </div>
-            <div className={"fixed left-[65%]"}>
+            <div className={"hidden md:block fixed left-[65%]"}>
                 <TopStories />
             </div>
         </div>

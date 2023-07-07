@@ -5,7 +5,7 @@ export default function NotificationCard(props){
     return(
         <div className={"w-full h-fit px-4 p-2"} style={styles}>
             <p className={"text-gray-700"}>{props.cause}</p>
-            <p className={"font-bold text-2xl w-[350px] truncate"}>{props.post}</p>
+            <p className={"font-bold text-2xl md:w-[350px] truncate"}>{props.post}</p>
         </div>
     )
 }
