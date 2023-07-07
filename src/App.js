@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Form from "./components/Form";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {data} from "./components/Data";
 import Notifications from "./components/Notifications";
 
