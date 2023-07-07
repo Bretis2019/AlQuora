@@ -42,7 +42,7 @@ export default function Form(props){
                         onChange={handleInputChange}
                     />
                 </>
-                <button className={"p-2 px-4 shadow-standard"} onClick={handleSubmit}>Submit</button>
+                <button className={"p-2 px-4 shadow-standard hover:bg-gray-100"} onClick={handleSubmit}>Submit</button>
             </div>
         </div>
     )

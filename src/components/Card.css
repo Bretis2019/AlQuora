@@ -1,0 +1,21 @@
+#answers {
+    --max-lines: 8;
+    --line-height: 1.4;
+    max-height: calc(var( --max-lines) * 1em * var(--line-height));
+    line-height: var( --line-height);
+    overflow: hidden;
+    position: relative;
+}
+
+#expand-btn {
+    appearance: none;
+}
+#expand-btn:hover {
+    background-color: #CCC;
+}
+#expand-btn::before {
+    content: "Expand";
+}
+#expand-btn:checked::before {
+    content: "Collapse";
+}

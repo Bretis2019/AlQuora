@@ -34,7 +34,7 @@ export default function Home(props) {
             <div className={"flex flex-col gap-y-14"}>
                 {cardElements}
             </div>
-            <div className={"hidden md:block fixed left-[65%]"}>
+            <div className={"hidden md:block fixed left-[63%]"}>
                 <TopStories />
             </div>
         </div>
