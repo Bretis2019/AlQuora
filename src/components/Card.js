@@ -14,7 +14,7 @@ export default function Card(props) {
     const [ulStyle, setUlStyle] = useState({ maxHeight: null });
 
 
-    const handleCheckboxChange = () => {
+    /*const handleCheckboxChange = () => {
         setIsChecked(prevIsChecked => !prevIsChecked);
 
         setUlStyle(prevUlStyle => {
@@ -23,15 +23,26 @@ export default function Card(props) {
             }
             return { maxHeight: null };
         });
+    };*/
+
+    const handleCheckboxChange = () => {
+        setIsChecked(prevIsChecked => !prevIsChecked);
+
+        setUlStyle(prevUlStyle => {
+            if (!prevUlStyle.display) {
+                return { display: 'block' };
+            }
+            return { display: null };
+        });
     };
 
     return (
         <div className={"bg-white p-8 w-[100svw] md:w-[580px] h-fit rounded-2xl shadow-standard"}>
             <h1 className={"font-black text-2xl mb-4"}>{question}</h1>
             <ul id={"answers"} style={ulStyle} className={" list-disc space-y-4"}>{answerElements}</ul>
-            <button className={"mt-3 p-2 px-3 shadow-standard hover:bg-gray-100"} onClick={addAnswer}>Answer</button>
+            <button className={"rounded-md mt-3 p-2 px-3 shadow-standard hover:bg-gray-100"} onClick={addAnswer}>Answer</button>
             <input id={"expand-btn"} checked={isChecked} onChange={handleCheckboxChange}
-                    className={"cursor-pointer ml-4 appearance-none mt-3 p-2 px-3 shadow-standard hover:bg-gray-100"}
+                    className={"rounded-md cursor-pointer ml-4 appearance-none mt-3 p-2 px-3 shadow-standard hover:bg-gray-100"}
                     type={"checkbox"}/>
         </div>
     );

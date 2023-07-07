@@ -1,10 +1,18 @@
-#answers {
+/*#answers {
     --max-lines: 8;
     --line-height: 1.4;
     max-height: calc(var( --max-lines) * 1em * var(--line-height));
     line-height: var( --line-height);
     overflow: hidden;
     position: relative;
+}*/
+
+#answers{
+    --max-lines: 8;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--max-lines);
 }
 
 #expand-btn {
@@ -14,8 +22,8 @@
     background-color: #CCC;
 }
 #expand-btn::before {
-    content: "Expand";
+    content: "See more";
 }
 #expand-btn:checked::before {
-    content: "Collapse";
+    content: "See less";
 }

@@ -29,7 +29,7 @@ export default function Form(props){
                 <>
                     <label
                         htmlFor="message"
-                        className="block mb-2 text-sm font-medium text-black"
+                        className="block mb-2 font-medium text-black text-3xl"
                     >
                         {props.state ? "Submit an answer":"Ask a question"}
                     </label>
@@ -42,7 +42,7 @@ export default function Form(props){
                         onChange={handleInputChange}
                     />
                 </>
-                <button className={"p-2 px-4 shadow-standard hover:bg-gray-100"} onClick={handleSubmit}>Submit</button>
+                <button className={"rounded-md p-2 px-4 shadow-standard hover:bg-gray-100"} onClick={handleSubmit}>Submit</button>
             </div>
         </div>
     )
