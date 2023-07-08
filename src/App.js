@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import Form from "./components/Form";
 import {useEffect, useState} from "react";
-import {addDoc, doc, getDoc, onSnapshot, setDoc} from "firebase/firestore"
+import {addDoc, doc, getDoc, onSnapshot, setDoc, updateDoc} from "firebase/firestore"
 import {auth, db, questionCollection, newsCollection} from "./config";
 import Login from "./components/Login";
 import {onAuthStateChanged, signOut} from "firebase/auth"
@@ -35,13 +35,12 @@ export default function App() {
             if (!snapshot.empty) {
                 const firstDocument = snapshot.docs[0].data();
                 const epochTime = firstDocument.date;
-                const currentTime = Date.now(); // Get current time in epoch time (milliseconds)
-                const twentyFourHoursInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+                const currentTime = Date.now();
+                const twentyFourHoursInMilliseconds =  60 * 60 * 1000; // x hours * 60 minutes * 60 seconds * 1000 milliseconds
 
                 if (currentTime - epochTime <= twentyFourHoursInMilliseconds) {
                     setNews(JSON.parse(firstDocument.news))
                 } else {
-                        console.log("had to hit the server up unfortunately")
                         const apiKey = 'woYgQZN5mcoJRFsdEL5CuvpJYqG-NLnaKbrVAgsSqy0';
                         const url = 'https://api.newscatcherapi.com/v2/search?q="Algeria"&lang=en';
                         const headers = {
@@ -59,18 +58,17 @@ export default function App() {
                                 }
                             })
                             .then(data => {
-                                firstDocument.update({
+                                const docRef = doc(db,"news", snapshot.docs[0].id)
+                                updateDoc(docRef, {
                                     date: Date.now(),
                                     news: JSON.stringify(data.articles)
-                                })
-                                setNews(JSON.parse(firstDocument.news))
+                                }).then(setNews(JSON.parse(firstDocument.news)))
                             })
                             .catch(error => {
                                 console.error(error);
                             });
                 }
             } else {
-                // No documents found in the collection
                 console.log("No documents found in the collection.");
             }
         });
