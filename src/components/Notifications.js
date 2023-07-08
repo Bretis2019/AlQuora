@@ -2,9 +2,9 @@ import NotificationCard from "./NotificationCard";
 
 export default function Notifications(){
     return(
-        <div className={"pt-28 bg-gray-100 w-screen h-fit min-h-screen flex md:pl-[15%] py-16 gap-x-16"}>
-            <div className={"bg-white p-4 w-screen md:w-[580px] h-fit rounded-2xl shadow-nav"}>
-                <h1 className={"text-center text-2xl font-bold font-logo"}>Your Notifications</h1>
+        <div className={"pt-28 dark:bg-gray-900 bg-gray-100 w-screen h-fit min-h-screen flex md:pl-[15%] py-16 gap-x-16"}>
+            <div className={"dark:bg-gray-800 bg-white p-4 w-screen md:w-[580px] h-fit rounded-2xl shadow-nav"}>
+                <h1 className={"dark:text-white text-center text-2xl font-bold font-logo"}>Your Notifications</h1>
                 <div className="inline-flex items-center justify-center w-full">
                     <hr className="w-64 h-1 my-8 bg-gray-200 border-0 rounded " />
                 </div>

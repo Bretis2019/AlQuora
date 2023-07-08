@@ -30,7 +30,7 @@ export default function Home(props) {
     }
 
     return (
-        <div className={"pt-20 md:pt-28 bg-gray-100 w-screen h-fit min-h-screen flex md:pl-[15%] py-16 gap-x-16"}>
+        <div className={"pt-20 md:pt-28 bg-gray-100 dark:bg-gray-900 w-screen h-fit min-h-screen flex md:pl-[15%] py-16 gap-x-16"}>
             <div className={"flex flex-col gap-y-8 md:gap-y-14"}>
                 {cardElements}
             </div>

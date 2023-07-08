@@ -1,12 +1,12 @@
 export default function TopStories(){
     return(
-        <div className={"bg-white p-4 w-[350px] h-fit rounded-2xl shadow-nav "}>
-            <h1 className={"font-bold font-logo"}>Today's Top Stories</h1>
+        <div className={"dark:bg-gray-800 bg-white p-4 w-[350px] h-fit rounded-2xl shadow-nav "}>
+            <h1 className={"dark:text-white font-bold font-logo"}>Today's Top Stories</h1>
             <div className="inline-flex items-center justify-center w-full">
                 <hr className="w-64 h-1 my-8 bg-gray-200 border-0 rounded " />
-                <div className="absolute px-4 -translate-x-1/2 bg-white left-1/2 ">
+                <div className="absolute px-4 -translate-x-1/2 dark:bg-gray-800 bg-white left-1/2 ">
                     <svg
-                            className="w-4 h-4 text-gray-700 "
+                            className="w-4 h-4 dark:text-gray-100 text-gray-700 "
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor"
@@ -16,7 +16,7 @@ export default function TopStories(){
                     </svg>
                 </div>
             </div>
-            <ul className={"space-y-4"}>
+            <ul className={"dark:text-white space-y-4"}>
                 <li>Spain dismantles network of migrant smugglers from Algeria.</li>
                 <li>History Illustrated: Ghost of the Algerian war.</li>
                 <li>Algeria's Tamgout cheese: A Swiss-inspired success story.</li>
