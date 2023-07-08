@@ -19,6 +19,8 @@ export default function Home(props) {
                 key={item.id}
                 question={item.header}
                 answers={item.answers}
+                createdBy={item.createdBy}
+                createdAt={item.createdAt}
                 handleClick={() => addAnswer(item.id)}
             />
         ));

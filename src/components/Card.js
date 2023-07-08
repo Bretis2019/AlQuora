@@ -1,7 +1,12 @@
 import "./Card.css"
 import {useState} from "react";
 export default function Card(props) {
-    const { question, answers, questionIndex, handleClick } = props;
+    const { question, answers, questionIndex, handleClick, createdBy, createdAt } = props;
+
+    const date = new Date(createdAt);
+
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString(undefined, options);
 
     const answerElements = answers.map((item, index) => (
         <li key={index}>{item}</li>
@@ -38,6 +43,7 @@ export default function Card(props) {
 
     return (
         <div className={"dark:bg-gray-800 bg-white p-8 w-[100svw] md:w-[580px] h-fit rounded-2xl shadow-standard"}>
+            <p className={"dark:text-gray-400 text-xs"}>{createdBy} on {formattedDate}</p>
             <h1 className={"font-black dark:text-white text-2xl mb-4"}>{question}</h1>
             <ul id={"answers"} style={ulStyle} className={" list-disc space-y-4 dark:text-white"}>{answerElements}</ul>
             <button className={"rounded-md mt-3 p-2 px-3 shadow-standard dark:hover:bg-gray-700 hover:bg-gray-100 dark:text-white"} onClick={addAnswer}>Answer</button>

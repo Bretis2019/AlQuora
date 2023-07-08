@@ -34,7 +34,6 @@ export default function App() {
         return onAuthStateChanged(auth, (user) => {
             if (user) {
                 setAuthUser(user)
-                console.log(authUser)
             } else {
                 setAuthUser(null)
             }
@@ -43,7 +42,6 @@ export default function App() {
 
     function userSignOut(){
         signOut(auth)
-            .then(() =>{console.log("Signed out successfully")})
             .catch((error) =>{console.log(error)})
     }
 
@@ -51,7 +49,7 @@ export default function App() {
         setIndex(prop)
     }
     async function addQuestion(header){
-        const newQuestion = { header, answers: [] };
+        const newQuestion = { header, answers: [], createdAt: Date.now(), createdBy: authUser ? authUser.email: 'anonymous'};
         await addDoc(questionCollection, newQuestion)
     }
 
