@@ -14,16 +14,16 @@ export default function Card(props) {
     const [ulStyle, setUlStyle] = useState({ maxHeight: null });
 
 
-    /*const handleCheckboxChange = () => {
-        setIsChecked(prevIsChecked => !prevIsChecked);
+    function getTotalStringLength(arr) {
+        let totalLength = 0;
 
-        setUlStyle(prevUlStyle => {
-            if (!prevUlStyle.maxHeight) {
-                return { maxHeight: 'none' };
-            }
-            return { maxHeight: null };
-        });
-    };*/
+        for (let i = 0; i < arr.length; i++) {
+            totalLength += arr[i].length;
+        }
+
+        return totalLength;
+    }
+
 
     const handleCheckboxChange = () => {
         setIsChecked(prevIsChecked => !prevIsChecked);
@@ -41,9 +41,9 @@ export default function Card(props) {
             <h1 className={"font-black dark:text-white text-2xl mb-4"}>{question}</h1>
             <ul id={"answers"} style={ulStyle} className={" list-disc space-y-4 dark:text-white"}>{answerElements}</ul>
             <button className={"rounded-md mt-3 p-2 px-3 shadow-standard dark:hover:bg-gray-700 hover:bg-gray-100 dark:text-white"} onClick={addAnswer}>Answer</button>
-            <input id={"expand-btn"} checked={isChecked} onChange={handleCheckboxChange}
-                    className={"dark:text-white rounded-md cursor-pointer ml-4 appearance-none mt-3 p-2 px-3 shadow-standard  dark:hover:bg-gray-700 hover:bg-gray-100"}
-                    type={"checkbox"}/>
+            {getTotalStringLength(answers) > 500 && <input id={"expand-btn"} checked={isChecked} onChange={handleCheckboxChange}
+                                                           className={"dark:text-white rounded-md cursor-pointer ml-4 appearance-none mt-3 p-2 px-3 shadow-standard  dark:hover:bg-gray-700 hover:bg-gray-100"}
+                                                           type={"checkbox"}/>}
         </div>
     );
 }

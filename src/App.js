@@ -1,11 +1,14 @@
 import './App.css';
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
 import Form from "./components/Form";
 import {useEffect, useState} from "react";
+import {addDoc, doc, getDoc, onSnapshot, setDoc} from "firebase/firestore"
+import {auth, db, questionCollection} from "./config";
+import Login from "./components/Login";
+import {onAuthStateChanged, signOut} from "firebase/auth"
+import Home from "./components/Home";
 import Notifications from "./components/Notifications";
-import {addDoc, onSnapshot, setDoc, doc, getDoc} from "firebase/firestore"
-import {questionCollection, db} from "./config";
+import Signup from "./components/Signup";
 
 export default function App() {
     const [questions, setQuestions] = useState([]);
@@ -14,6 +17,7 @@ export default function App() {
     const [index, setIndex] = useState(0)
     const [page, setPage] = useState("home")
     const [query, setQuery] = useState("")
+    const [authUser, setAuthUser] = useState(null)
 
     useEffect(() => {
         return onSnapshot(questionCollection, function (snapshot) {
@@ -26,14 +30,26 @@ export default function App() {
         })
     }, [])
 
+    useEffect(() =>{
+        return onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setAuthUser(user)
+                console.log(authUser)
+            } else {
+                setAuthUser(null)
+            }
+        })
+    },[])
+
+    function userSignOut(){
+        signOut(auth)
+            .then(() =>{console.log("Signed out successfully")})
+            .catch((error) =>{console.log(error)})
+    }
+
     function getIndex(prop){
         setIndex(prop)
     }
-
-    useEffect(()=>{
-        console.log(questions)
-    },[questions])
-
     async function addQuestion(header){
         const newQuestion = { header, answers: [] };
         await addDoc(questionCollection, newQuestion)
@@ -77,8 +93,8 @@ export default function App() {
     return (
         <div>
             {showForm && <Form index={index} state={formState} handleClickA={addAnswer} handleClickQ={addQuestion} hideForm={hideForm} displayForm={DisplayFormA}/>}
-            <Navbar handleClickShow={DisplayFormQ} pageChange={pageChange} handleChange={handleChange}/>
-            {page === "home" ? <Home query={query} questions={questions} handleClick={DisplayFormA} getIndex={getIndex}/> : <Notifications />}
+            <Navbar handleClickShow={DisplayFormQ} pageChange={pageChange} handleChange={handleChange} user={authUser} userSingOut={userSignOut}/>
+            {page === "home" ? <Home query={query} questions={questions} handleClick={DisplayFormA} getIndex={getIndex}/> : page === "notifications" ? <Notifications /> : page==="login" ? <Login pageChange={pageChange}/> : <Signup pageChange={pageChange}/>}
         </div>
     )
 }
