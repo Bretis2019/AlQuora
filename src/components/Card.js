@@ -42,7 +42,7 @@ export default function Card(props) {
             <ul id={"answers"} style={ulStyle} className={" list-disc space-y-4 dark:text-white"}>{answerElements}</ul>
             <button className={"rounded-md mt-3 p-2 px-3 shadow-standard dark:hover:bg-gray-700 hover:bg-gray-100 dark:text-white"} onClick={addAnswer}>Answer</button>
             <input id={"expand-btn"} checked={isChecked} onChange={handleCheckboxChange}
-                    className={"dark:text-white rounded-md cursor-pointer ml-4 appearance-none mt-3 p-2 px-3 shadow-standard dark:hover:bg-gray-700 hover:bg-gray-100"}
+                    className={"dark:text-white rounded-md cursor-pointer ml-4 appearance-none mt-3 p-2 px-3 shadow-standard  dark:hover:bg-gray-700 hover:bg-gray-100"}
                     type={"checkbox"}/>
         </div>
     );

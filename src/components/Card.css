@@ -18,9 +18,6 @@
 #expand-btn {
     appearance: none;
 }
-#expand-btn:hover {
-    background-color: #CCC;
-}
 #expand-btn::before {
     content: "See more";
 }
