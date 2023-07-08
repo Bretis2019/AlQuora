@@ -94,7 +94,7 @@ export default function App() {
         setIndex(prop)
     }
     async function addQuestion(header){
-        const newQuestion = { header, answers: [], createdAt: Date.now(), createdBy: authUser ? authUser.email: 'anonymous'};
+        const newQuestion = { header, answers: [], createdAt: Date.now(), createdBy: authUser ? authUser.displayName ? authUser.displayName : authUser.email : 'anonymous'};
         await addDoc(questionCollection, newQuestion)
     }
 

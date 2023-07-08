@@ -17,6 +17,7 @@ export default function Login(props){
         signInWithPopup(auth,provider)
             .then((userCredentials) =>{console.log(userCredentials)})
             .catch((error) =>{console.log(error)})
+        props.pageChange("home")
     }
 
     return(
