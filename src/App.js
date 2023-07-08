@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Form from "./components/Form";
 import {useEffect, useState} from "react";
 import {addDoc, doc, getDoc, onSnapshot, setDoc} from "firebase/firestore"
-import {auth, db, questionCollection} from "./config";
+import {auth, db, questionCollection, newsCollection} from "./config";
 import Login from "./components/Login";
 import {onAuthStateChanged, signOut} from "firebase/auth"
 import Home from "./components/Home";
@@ -22,7 +22,6 @@ export default function App() {
 
     useEffect(() => {
         return onSnapshot(questionCollection, function (snapshot) {
-            // Sync up our local notes array with the snapshot data
             const questionsArr = snapshot.docs.map(doc => ({
                 ...doc.data(),
                 id: doc.id
@@ -30,6 +29,53 @@ export default function App() {
             setQuestions(questionsArr)
         })
     }, [])
+
+    useEffect(() => {
+        return onSnapshot(newsCollection, function(snapshot) {
+            if (!snapshot.empty) {
+                const firstDocument = snapshot.docs[0].data();
+                const epochTime = firstDocument.date;
+                const currentTime = Date.now(); // Get current time in epoch time (milliseconds)
+                const twentyFourHoursInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+
+                if (currentTime - epochTime <= twentyFourHoursInMilliseconds) {
+                    setNews(JSON.parse(firstDocument.news))
+                } else {
+                        console.log("had to hit the server up unfortunately")
+                        const apiKey = 'woYgQZN5mcoJRFsdEL5CuvpJYqG-NLnaKbrVAgsSqy0';
+                        const url = 'https://api.newscatcherapi.com/v2/search?q="Algeria"&lang=en';
+                        const headers = {
+                            'x-api-key': apiKey
+                        };
+                        fetch(url, {
+                            method: 'GET',
+                            headers: headers
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    throw new Error('Request failed with status code ' + response.status);
+                                }
+                            })
+                            .then(data => {
+                                firstDocument.update({
+                                    date: Date.now(),
+                                    news: JSON.stringify(data.articles)
+                                })
+                                setNews(JSON.parse(firstDocument.news))
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                }
+            } else {
+                // No documents found in the collection
+                console.log("No documents found in the collection.");
+            }
+        });
+    }, []);
+
 
     useEffect(() =>{
         return onAuthStateChanged(auth, (user) => {
@@ -39,33 +85,6 @@ export default function App() {
                 setAuthUser(null)
             }
         })
-    },[])
-
-    useEffect(() =>{
-        const apiKey = 'woYgQZN5mcoJRFsdEL5CuvpJYqG-NLnaKbrVAgsSqy0';
-        const url = 'https://api.newscatcherapi.com/v2/search?q="Algeria"&lang=en';
-        const headers = {
-            'x-api-key': apiKey
-        };
-        fetch(url, {
-            method: 'GET',
-            headers: headers
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Request failed with status code ' + response.status);
-                }
-            })
-            .then(data => {
-                // Handle the response data here
-                setNews(data.articles)
-            })
-            .catch(error => {
-                // Handle any errors that occur during the request
-                console.error(error);
-            });
     },[])
 
     function userSignOut(){
