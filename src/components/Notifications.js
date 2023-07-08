@@ -1,6 +1,7 @@
 import NotificationCard from "./NotificationCard";
 
 export default function Notifications(){
+
     return(
         <div className={"pt-28 dark:bg-gray-900 bg-gray-100 w-screen h-fit min-h-screen flex md:pl-[15%] py-16 gap-x-16"}>
             <div className={"dark:bg-gray-800 bg-white p-4 w-screen md:w-[580px] h-fit rounded-2xl shadow-nav"}>

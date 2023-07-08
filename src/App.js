@@ -18,6 +18,7 @@ export default function App() {
     const [page, setPage] = useState("home")
     const [query, setQuery] = useState("")
     const [authUser, setAuthUser] = useState(null)
+    const [news, setNews] = useState([])
 
     useEffect(() => {
         return onSnapshot(questionCollection, function (snapshot) {
@@ -38,6 +39,33 @@ export default function App() {
                 setAuthUser(null)
             }
         })
+    },[])
+
+    useEffect(() =>{
+        const apiKey = 'woYgQZN5mcoJRFsdEL5CuvpJYqG-NLnaKbrVAgsSqy0';
+        const url = 'https://api.newscatcherapi.com/v2/search?q="Algeria"&lang=en';
+        const headers = {
+            'x-api-key': apiKey
+        };
+        fetch(url, {
+            method: 'GET',
+            headers: headers
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Request failed with status code ' + response.status);
+                }
+            })
+            .then(data => {
+                // Handle the response data here
+                setNews(data.articles)
+            })
+            .catch(error => {
+                // Handle any errors that occur during the request
+                console.error(error);
+            });
     },[])
 
     function userSignOut(){
@@ -92,7 +120,7 @@ export default function App() {
         <div>
             {showForm && <Form index={index} state={formState} handleClickA={addAnswer} handleClickQ={addQuestion} hideForm={hideForm} displayForm={DisplayFormA}/>}
             <Navbar handleClickShow={DisplayFormQ} pageChange={pageChange} handleChange={handleChange} user={authUser} userSingOut={userSignOut}/>
-            {page === "home" ? <Home query={query} questions={questions} handleClick={DisplayFormA} getIndex={getIndex}/> : page === "notifications" ? <Notifications /> : page==="login" ? <Login pageChange={pageChange}/> : <Signup pageChange={pageChange}/>}
+            {page === "home" ? <Home news={news} query={query} questions={questions} handleClick={DisplayFormA} getIndex={getIndex}/> : page === "notifications" ? <Notifications /> : page==="login" ? <Login pageChange={pageChange}/> : <Signup pageChange={pageChange}/>}
         </div>
     )
 }

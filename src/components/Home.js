@@ -37,7 +37,7 @@ export default function Home(props) {
                 {cardElements}
             </div>
             <div className={"hidden md:block fixed left-[63%]"}>
-                <TopStories />
+                <TopStories news={props.news}/>
             </div>
         </div>
     );
