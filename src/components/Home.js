@@ -21,6 +21,7 @@ export default function Home(props) {
                 answers={item.answers}
                 createdBy={item.createdBy}
                 createdAt={item.createdAt}
+                url={item.url}
                 handleClick={() => addAnswer(item.id)}
             />
         ));

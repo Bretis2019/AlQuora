@@ -1,22 +1,48 @@
 import {useState} from "react";
+import { storage } from "../config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 export default function Form(props){
 
     const [inputValue, setInputValue] = useState("");
+    const [imageUpload ,setImageUpload] = useState(null);
+    const [imageUrl, setImageUrl] = useState("");
+
+    async function uploadImage() {
+        try {
+            const imageRef = ref(storage, `${imageUpload.name}`);
+            await uploadBytes(imageRef, imageUpload);
+
+            const url = await getDownloadURL(imageRef);
+            setImageUrl(url);
+
+            props.handleClickQ(inputValue, url);
+        } catch (error) {
+            console.error("Image upload failed:", error);
+        }
+    }
+
+
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    function handleSubmit(e){
         e.preventDefault();
         if (inputValue.trim() !== "") {
-            if(!props.state){props.handleClickQ(inputValue);}
+            if(!props.state){
+                if(imageUpload){
+                    uploadImage().then(() => {
+                        if(imageUrl){props.handleClickQ(inputValue, imageUrl);}
+                    });
+                }
+                else{props.handleClickQ(inputValue, imageUrl);}}
             if(props.state){props.handleClickA(props.index, inputValue)}
             setInputValue("");
         }
         props.hideForm();
-    };
+    }
 
     function clickOnExit(e){
         if(e.target === e.currentTarget){
@@ -41,6 +67,7 @@ export default function Form(props){
                         value={inputValue}
                         onChange={handleInputChange}
                     />
+                    {(!props.state && props.user) && <input onChange={(e) => {setImageUpload(e.target.files[0])}} className={"className=\"block p-2.5 w-full text-sm dark:text-white text-black dark:bg-gray-800 bg-gray-50 rounded-lg border dark:border-gray-500 border-gray-300 focus:ring-blue-500  focus:border-blue-500"} type={"file"}></input>}
                 </>
                 <button className={"rounded-md p-2 px-4 shadow-standard dark:text-white dark:hover:bg-gray-700 hover:bg-gray-100"} onClick={handleSubmit}>Submit</button>
             </div>

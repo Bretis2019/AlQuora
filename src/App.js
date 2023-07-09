@@ -93,8 +93,8 @@ export default function App() {
     function getIndex(prop){
         setIndex(prop)
     }
-    async function addQuestion(header){
-        const newQuestion = { header, answers: [], createdAt: Date.now(), createdBy: authUser ? authUser.displayName ? authUser.displayName : authUser.email : 'anonymous'};
+    async function addQuestion(header, imgUrl){
+        const newQuestion = { header, url: imgUrl ,answers: [], createdAt: Date.now(), createdBy: authUser ? authUser.displayName ? authUser.displayName : authUser.email : 'anonymous'};
         await addDoc(questionCollection, newQuestion)
     }
 
@@ -135,7 +135,7 @@ export default function App() {
     }
     return (
         <div>
-            {showForm && <Form index={index} state={formState} handleClickA={addAnswer} handleClickQ={addQuestion} hideForm={hideForm} displayForm={DisplayFormA}/>}
+            {showForm && <Form index={index} state={formState} handleClickA={addAnswer} handleClickQ={addQuestion} hideForm={hideForm} displayForm={DisplayFormA} user={authUser}/>}
             <Navbar handleClickShow={DisplayFormQ} pageChange={pageChange} handleChange={handleChange} user={authUser} userSingOut={userSignOut}/>
             {page === "home" ? <Home news={news} query={query} questions={questions} handleClick={DisplayFormA} getIndex={getIndex}/> : page === "notifications" ? <Notifications /> : page==="login" ? <Login pageChange={pageChange}/> : <Signup pageChange={pageChange}/>}
         </div>
