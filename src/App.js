@@ -93,8 +93,8 @@ export default function App() {
     function getIndex(prop){
         setIndex(prop)
     }
-    async function addQuestion(header, imgUrl){
-        const newQuestion = { header, url: imgUrl ,answers: [], createdAt: Date.now(), createdBy: authUser ? authUser.displayName ? authUser.displayName : authUser.email : 'anonymous'};
+    async function addQuestion(header, imgUrl, Option){
+        const newQuestion = { header, url: imgUrl , option: Option ,answers: [], createdAt: Date.now(), createdBy: authUser ? authUser.displayName ? authUser.displayName : authUser.email : 'anonymous'};
         await addDoc(questionCollection, newQuestion)
     }
 
