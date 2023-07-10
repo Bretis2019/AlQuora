@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/AlQuora/static/css/main.36b6c89b.css",
-    "main.js": "/AlQuora/static/js/main.df7cbb92.js",
+    "main.css": "/AlQuora/static/css/main.f83c4b35.css",
+    "main.js": "/AlQuora/static/js/main.810bafb3.js",
     "static/js/787.1ef5ba40.chunk.js": "/AlQuora/static/js/787.1ef5ba40.chunk.js",
     "index.html": "/AlQuora/index.html",
-    "main.36b6c89b.css.map": "/AlQuora/static/css/main.36b6c89b.css.map",
-    "main.df7cbb92.js.map": "/AlQuora/static/js/main.df7cbb92.js.map",
+    "main.f83c4b35.css.map": "/AlQuora/static/css/main.f83c4b35.css.map",
+    "main.810bafb3.js.map": "/AlQuora/static/js/main.810bafb3.js.map",
     "787.1ef5ba40.chunk.js.map": "/AlQuora/static/js/787.1ef5ba40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.36b6c89b.css",
-    "static/js/main.df7cbb92.js"
+    "static/css/main.f83c4b35.css",
+    "static/js/main.810bafb3.js"
   ]
 }
