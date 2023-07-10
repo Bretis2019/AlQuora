@@ -15,7 +15,7 @@ export default function TopStories(props){
     }
 
     const itemElements = randomItems.map(item => (
-        <li className={"cursor-pointer"} key={item._id} onClick={() => handleClick(item.link)}>{item.title}<br></br></li>
+        <li className={"hover:font-bold cursor-pointer"} key={item._id} onClick={() => handleClick(item.link)}>{item.title}<br></br></li>
     ));
 
     return(

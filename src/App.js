@@ -136,8 +136,8 @@ export default function App() {
     return (
         <div>
             {showForm && <Form index={index} state={formState} handleClickA={addAnswer} handleClickQ={addQuestion} hideForm={hideForm} displayForm={DisplayFormA} user={authUser}/>}
-            <Navbar handleClickShow={DisplayFormQ} pageChange={pageChange} handleChange={handleChange} user={authUser} userSingOut={userSignOut}/>
-            {page === "home" ? <Home news={news} query={query} questions={questions} handleClick={DisplayFormA} getIndex={getIndex}/> : page === "notifications" ? <Notifications /> : page==="login" ? <Login pageChange={pageChange}/> : <Signup pageChange={pageChange}/>}
+            <Navbar handleClickShow={DisplayFormQ} pageChange={pageChange} handleChange={handleChange} user={authUser} userSingOut={userSignOut} inputValue={query}/>
+            {page === "home" ? <Home news={news} query={query} questions={questions} handleClick={DisplayFormA} getIndex={getIndex} handleChange={handleChange}/> : page === "notifications" ? <Notifications /> : page==="login" ? <Login pageChange={pageChange}/> : <Signup pageChange={pageChange}/>}
         </div>
     )
 }

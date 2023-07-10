@@ -1,5 +1,6 @@
 import Card from "./Card";
 import TopStories from "./TopStories";
+import Categories from "./Categories";
 export default function Home(props) {
     const { questions, handleClick } = props;
 
@@ -33,8 +34,11 @@ export default function Home(props) {
     }
 
     return (
-        <div className={"pt-20 md:pt-28 bg-gray-100 dark:bg-gray-900 w-screen h-fit min-h-screen flex md:pl-[15%] py-16 gap-x-16"}>
-            <div className={"flex flex-col gap-y-8 md:gap-y-14"}>
+        <div className={"pt-20 md:pt-28 bg-gray-100 dark:bg-gray-900 w-screen h-fit min-h-screen flex md:pl-[4%] py-16 gap-x-16"}>
+            <div className={"hidden md:block fixed"}>
+                <Categories handleChange={props.handleChange}/>
+            </div>
+            <div className={"flex flex-col md:pl-[20%] gap-y-8 md:gap-y-14"}>
                 {cardElements}
             </div>
             <div className={"hidden md:block fixed left-[63%]"}>

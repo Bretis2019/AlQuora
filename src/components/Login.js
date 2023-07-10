@@ -9,13 +9,11 @@ export default function Login(props){
     function login(event){
         event.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredentials) =>{console.log(userCredentials)})
             .catch((error) =>{console.log(error)})
         props.pageChange("home")
     }
     function loginWithGoogle(){
         signInWithPopup(auth,provider)
-            .then((userCredentials) =>{console.log(userCredentials)})
             .catch((error) =>{console.log(error)})
         props.pageChange("home")
     }
