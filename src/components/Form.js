@@ -72,22 +72,25 @@ export default function Form(props){
                         value={inputValue}
                         onChange={handleInputChange}
                     />
-                    <select onChange={handleSelectChange} className="block p-2.5 w-full text-sm dark:text-white text-black dark:bg-gray-800 bg-gray-50 rounded-lg border dark:border-gray-500 border-gray-300 focus:ring-blue-500  focus:border-blue-500">
-                        <option value="">--Please choose a category--</option>
-                        <option>Science and Technology</option>
-                        <option>History and Culture</option>
-                        <option>Arts and Entertainment</option>
-                        <option>Society and Politics</option>
-                        <option>Sports and Recreation</option>
-                        <option>Health and Wellness</option>
-                        <option>Geography and Travel</option>
-                        <option>Philosophy and Religion</option>
-                        <option>Miscellaneous</option>
-                    </select>
-                    {(!props.state && props.user) && <div className={"space-y-4"}>
-                        <label className={"font-medium dark:text-gray-300 text-black text-xl"} >Upload image (helps grab attention)</label>
-                        <input onChange={(e) => {setImageUpload(e.target.files[0])}} className={"className=\"block p-2.5 w-full text-sm dark:text-white text-black dark:bg-gray-800 bg-gray-50 rounded-lg border dark:border-gray-500 border-gray-300 focus:ring-blue-500  focus:border-blue-500"} type={"file"}></input>
-                    </div>}
+                    {(!props.state && props.user) &&
+                        <div>
+                            <select onChange={handleSelectChange} className="block p-2.5 w-full text-sm dark:text-white text-black dark:bg-gray-800 bg-gray-50 rounded-lg border dark:border-gray-500 border-gray-300 focus:ring-blue-500  focus:border-blue-500">
+                                <option value="">--Please choose a category--</option>
+                                <option>Science and Technology</option>
+                                <option>History and Culture</option>
+                                <option>Arts and Entertainment</option>
+                                <option>Society and Politics</option>
+                                <option>Sports and Recreation</option>
+                                <option>Health and Wellness</option>
+                                <option>Geography and Travel</option>
+                                <option>Philosophy and Religion</option>
+                                <option>Miscellaneous</option>
+                            </select>
+                            <div className={"space-y-4"}>
+                                <label className={"font-medium dark:text-gray-300 text-black text-xl"} >Upload image (helps grab attention)</label>
+                                <input onChange={(e) => {setImageUpload(e.target.files[0])}} className={"className=\"block p-2.5 w-full text-sm dark:text-white text-black dark:bg-gray-800 bg-gray-50 rounded-lg border dark:border-gray-500 border-gray-300 focus:ring-blue-500  focus:border-blue-500"} type={"file"}></input>
+                            </div>
+                        </div>}
                 </>
                 <button className={"rounded-md p-2 px-4 shadow-standard dark:text-white dark:hover:bg-gray-700 hover:bg-gray-100"} onClick={handleSubmit}>Submit</button>
             </div>
