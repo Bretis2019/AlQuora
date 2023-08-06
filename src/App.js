@@ -54,6 +54,7 @@ export default function App() {
                                 if (response.ok) {
                                     return response.json();
                                 } else {
+                                    setNews(JSON.parse(firstDocument.news));
                                     throw new Error('Request failed with status code ' + response.status);
                                 }
                             })
